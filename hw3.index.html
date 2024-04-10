@@ -1,0 +1,36 @@
+<head>
+  <link rel="stylesheet" type="text/css" href="stmarkdown.css">
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML">
+</script>
+</head>
+<p>A <u>user</u> initialized a dataset with 30 observations. Distribution of $${Age, years \sim Normal ; (\mu=57,\sigma^2=225)}$$</p>
+<pre><code>. *1. data simulation
+. set obs 30 //initialize your dataset with 30 observations usin the command
+
+. *2. variable generation
+. gen age=(rnormal()*15)+57 //normal distribution 
+
+. gen age_t=(rt(_N)*15)+57 //instead of normal distribution, t-distribution, _N means degrees of freedom
+
+. *3. Graphical representation
+. hist age, ///
+&gt;    fcolor(orange%40) /// simulated normal 
+&gt;    addplot(hist age_t, fcolor(midblue%50)) /// simulated t-distribution 
+&gt;    normal /// theoretical normal
+&gt;    legend(on ///
+&gt;       lab(1 &quot;Sampled from Normal&quot;) ///
+&gt;           lab(2 &quot;Theoretical Normal&quot;) ///
+&gt;           lab(3 &quot;Sampled from t-distribution&quot;) ///
+&gt;           )
+
+. graph export histogram_age_age_t.png, replace
+
+. 
+. 
+</code></pre>
+<p><img src="Graph2.svg" ></p>
+<pre><code></code></pre>
